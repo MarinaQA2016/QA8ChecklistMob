@@ -66,9 +66,23 @@ public class CheckListTests extends TestBase{
 
         checkListsPage.rotateScreenPortrate();
         checkListsPage.waitUntilPageIsLoaded();
-
     }
+    @Test
+    public void addNewNotEmptyCheckListAndRotate(){
+        checkListsPage.createNewCheckList("CheckListForRotation");
+        currentCheckList.waitUntilPageIsLoaded();
+        currentCheckList.addNewItem("ItemTest");
+        currentCheckList.checkFirstItem();
+        currentCheckList.rotateScreenLandScape();
+        currentCheckList.navigateBack();
+        currentCheckList.waitUntilPageIsLoaded();
 
+        Assert.assertTrue(currentCheckList.isFirstItemChecked());
+
+        currentCheckList.backToCheckListsPage();
+        checkListsPage.rotateScreenPortrate();
+        checkListsPage.waitUntilPageIsLoaded();
+    }
 
 
 }

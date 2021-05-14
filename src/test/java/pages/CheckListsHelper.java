@@ -51,4 +51,6 @@ public class CheckListsHelper extends PageBase {
     public String getTitle() {
         return titleCheckLists.getText();
     }
+
+
 }

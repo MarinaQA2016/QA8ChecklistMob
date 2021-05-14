@@ -124,4 +124,8 @@ public class PageBase {
         appDriver.rotate(ScreenOrientation.PORTRAIT);
     }
 
+    public void navigateBack(){
+        driver.navigate().back();
+    }
+
 }
