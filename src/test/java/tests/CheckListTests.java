@@ -17,15 +17,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class CheckListTests extends TestBase{
-    CheckListsHelper checkListsPage;
+    //CheckListsHelper checkListsPage;
     CurrentCheckListHelper currentCheckList;
 
     @BeforeMethod
     public void initTests(){
-        checkListsPage = PageFactory.initElements(driver, CheckListsHelper.class);
+
         currentCheckList = PageFactory.initElements(driver, CurrentCheckListHelper.class);
 
-        checkListsPage.waitUntilPageIsLoaded();
+
     }
 
     @Test
@@ -70,9 +70,10 @@ public class CheckListTests extends TestBase{
     @Test
     public void addNewNotEmptyCheckListAndRotate(){
         checkListsPage.createNewCheckList("CheckListForRotation");
-        currentCheckList.waitUntilPageIsLoaded();
-        currentCheckList.addNewItem("ItemTest");
-        currentCheckList.checkFirstItem();
+        currentCheckList
+                .waitUntilPageIsLoaded()
+                .addNewItem("ItemTest")
+                .checkFirstItem();
         currentCheckList.rotateScreenLandScape();
         currentCheckList.navigateBack();
         currentCheckList.waitUntilPageIsLoaded();
@@ -83,6 +84,45 @@ public class CheckListTests extends TestBase{
         checkListsPage.rotateScreenPortrate();
         checkListsPage.waitUntilPageIsLoaded();
     }
+    @Test
+    public void addNewCheckListAndGoToBackGround(){
+        checkListsPage.createNewCheckList("CheckListEmpty");
+        currentCheckList.waitUntilPageIsLoaded();
+        currentCheckList.backToCheckListsPage();
+        checkListsPage.waitUntilPageIsLoaded();
+        checkListsPage.runBackGround(5);
+        checkListsPage.waitUntilPageIsLoaded();
+
+        Assert.assertTrue(checkListsPage.isLastCheckListTitle("CheckListEmpty"));
+    }
+    @Test
+    public void createManyCheckListsAndSwipeThem(){
+        for(int i=0; i<30; i++){
+            checkListsPage.createNewCheckList("CheckListEmpty" + i);
+            currentCheckList.waitUntilPageIsLoaded();
+            currentCheckList.backToCheckListsPage();
+            checkListsPage.waitUntilPageIsLoaded();
+        }
+        checkListsPage.swipeUp();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        checkListsPage.swipeDown();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        checkListsPage.swipeUpToLastElement();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

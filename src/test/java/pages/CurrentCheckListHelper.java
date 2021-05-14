@@ -24,9 +24,10 @@ public class CurrentCheckListHelper extends  PageBase{
         super(driver);
     }
 
-    public void waitUntilPageIsLoaded() {
+    public CurrentCheckListHelper waitUntilPageIsLoaded() {
         waitUntilElementIsClickable(backIcon,10);
         waitUntilElementIsClickable(addItemButton,5);
+        return this;
     }
 
     public void backToCheckListsPage() {
@@ -34,13 +35,15 @@ public class CurrentCheckListHelper extends  PageBase{
     }
 
 
-    public void addNewItem(String name) {
+    public CurrentCheckListHelper addNewItem(String name) {
         fillField(addEditField,name);
         waitUntilElementIsClickable(addItemButton,10);
         addItemButton.click();
+        return this;
     }
 
     public void checkFirstItem() {
+        waitUntilElementIsClickable(checkFirstItemIcon,5);
         checkFirstItemIcon.click();
     }
 

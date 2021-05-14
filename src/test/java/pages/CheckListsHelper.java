@@ -53,4 +53,7 @@ public class CheckListsHelper extends PageBase {
     }
 
 
+    public void swipeUpToLastElement() {
+        this.swipeUpToElement(By.xpath("//*[@text = 'CheckListEmpty11']"),5);
+    }
 }
