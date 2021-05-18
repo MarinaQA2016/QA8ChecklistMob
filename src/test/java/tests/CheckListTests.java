@@ -20,12 +20,9 @@ public class CheckListTests extends TestBase{
     //CheckListsHelper checkListsPage;
     CurrentCheckListHelper currentCheckList;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initTests(){
-
         currentCheckList = PageFactory.initElements(driver, CurrentCheckListHelper.class);
-
-
     }
 
     @Test
@@ -33,8 +30,9 @@ public class CheckListTests extends TestBase{
         Assert.assertEquals("Check List", checkListsPage.getTitle());
 
     }
-    @Test
+    @Test(groups = {"smoke","regression"})
     public void addNewList()  {
+        log4j.startTestCase("addNewList");
         int quantityBegin = checkListsPage.getQuantityLists();
         checkListsPage.createNewCheckList("CheckListEmpty");
         currentCheckList.waitUntilPageIsLoaded();
@@ -48,9 +46,10 @@ public class CheckListTests extends TestBase{
 
         Assert.assertEquals(quantityBegin+2,quantityEnd);
         Assert.assertTrue(checkListsPage.isLastCheckListTitle("CheckListNext"));
+        log4j.endTestCase();
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void addNewCheckListAndRotate(){
         int quantityBegin = checkListsPage.getQuantityLists();
         checkListsPage.createNewCheckList("CheckListForRotation");

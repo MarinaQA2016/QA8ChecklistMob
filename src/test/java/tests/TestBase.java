@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.CheckListsHelper;
+import util.LogLog4j;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,6 +15,7 @@ import java.net.URL;
 public class TestBase {
     public AppiumDriver driver;
     CheckListsHelper checkListsPage;
+    public static LogLog4j log4j = new LogLog4j();
 
     @BeforeMethod(alwaysRun = true)
     public void startUp() throws MalformedURLException {

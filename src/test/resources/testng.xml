@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Tests" verbose="5">
+
+  <test name="regression exclude smoke testing" enabled="true">
+    <groups>
+      <run>
+        <include name="smoke"></include>
+        <exclude name="regression"></exclude>
+      </run>
+    </groups>
+
+    <classes>
+      <class name="tests.CheckListTests"/>
+    </classes>
+      </test>
+</suite>
